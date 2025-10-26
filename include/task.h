@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 #include <ctime>
 
@@ -9,8 +8,8 @@ public:
     std::string category;
     std::tm dueDate;
     int priority;
-    bool isRecurring;
+    std::string recurrenceType;
 
-    Task(std::string t, std::string c, std::tm d, int p, bool r);
+    Task(std::string t, std::string c, std::tm d, int p, std::string r);
     std::string toString() const;
 };
