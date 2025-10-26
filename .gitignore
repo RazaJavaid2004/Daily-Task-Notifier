@@ -1,0 +1,24 @@
+# Build artifacts
+*.exe
+*.obj
+*.o
+*.out
+*.log
+
+# IDE files
+.vscode/
+*.sln
+*.vcxproj*
+*.user
+*.DS_Store
+
+# Backup files
+*~
+*.bak
+
+# OS-specific
+Thumbs.db
+desktop.ini
+
+# Data files
+data/tasks.txt
