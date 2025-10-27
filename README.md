@@ -6,17 +6,16 @@ A lightweight desktop application that displays your routine tasks for the day u
 
 ## 📌 Project Overview
 
-- **Language**: C++
-- **Purpose**: Help users remember daily routine tasks by showing them at system startup
-- **Scope**: Console-based app with file I/O, task filtering, and priority sorting
-- **Status**: Phase 2 completed ✅
+* **Language** : C++
+* **Purpose** : Help users remember daily routine tasks by showing them at system startup
+* **Scope** : Console-based app with file I/O, task filtering, recurrence logic, and priority sorting
+* **Status** : Phase 3 completed ✅
 
 ---
 
 ## 📁 Project Structure
 
 ```
-
 /DailyTaskNotifier
 │
 ├── include/                     # Header files (interfaces)
@@ -32,68 +31,74 @@ A lightweight desktop application that displays your routine tasks for the day u
 │   └── tasks.txt                # Task data file (text format)
 │
 ├── README.md                    # Project documentation
-
 ```
 
 ---
 
 ## 🧱 Data Structures Used
 
-| Structure | Purpose |
-|-----------|---------|
-| `class Task` | Encapsulates task details (title, date, priority, etc.) |
-| `std::vector<Task>` | Stores all tasks dynamically |
-| `std::map` *(planned)* | Group tasks by date or category |
-| `std::priority_queue` *(planned)* | Sort tasks by urgency |
-| `std::ifstream` / `std::ofstream` | File I/O for persistent storage |
+| Structure                             | Purpose                                                 |
+| ------------------------------------- | ------------------------------------------------------- |
+| `class Task`                        | Encapsulates task details (title, date, priority, etc.) |
+| `std::vector<Task>`                 | Stores all tasks dynamically                            |
+| `std::map` *(planned)*            | Group tasks by date or category                         |
+| `std::priority_queue` *(planned)* | Sort tasks by urgency                                   |
+| `std::ifstream`/`std::ofstream`   | File I/O for persistent storage                         |
 
 ---
 
 ## ⚙️ Algorithms Implemented
 
-| Algorithm | Purpose |
-|-----------|---------|
-| Date parsing | Converts string to `std::tm` for comparison |
-| Task serialization | Converts task to string format for saving |
-| File parsing | Reads tasks from `tasks.txt` and loads into memory |
+| Algorithm          | Purpose                                                 |
+| ------------------ | ------------------------------------------------------- |
+| Date parsing       | Converts string to `std::tm`for comparison            |
+| Task serialization | Converts task to string format for saving               |
+| File parsing       | Reads tasks from `tasks.txt`and loads into memory     |
+| Recurrence logic   | Supports `none`,`weekly`, and `monthly`recurrence |
+| Priority sorting   | Sorts tasks in ascending order of urgency               |
+| Title search       | Finds tasks by keyword match                            |
 
 ---
 
-## 🧪 Features Completed (Phase 1 & 2)
+## ✅ Features Completed (Phase 1–3)
 
-- [x] Finalized project scope and DSA plan
-- [x] Designed `Task` class with serialization
-- [x] Implemented `TaskManager` with:
-  - Task loading from file
-  - Task saving to file
-  - Task creation and listing
-- [x] Sample task added and persisted
+* [X] Finalized project scope and DSA plan
+* [X] Designed `Task` class with serialization
+* [X] Implemented `TaskManager` with:
+  * Task loading from file
+  * Task saving to file
+  * Task creation and listing
+  * Task filtering by today's date
+  * Recurrence support (`weekly`, `monthly`)
+  * Priority-based sorting
+  * Keyword search by title
 
 ---
 
 ## 📦 Sample Task Format (`tasks.txt`)
 
 ```
-
-Title|Category|YYYY-MM-DD|Priority|Recurring
-Water Plants|Personal|2025-10-27|2|1
-Finish DSA Assignment|Academic|2025-10-27|1|0
-
+Title|Category|YYYY-MM-DD|Priority|RecurrenceType
+Water Plants|Personal|2025-10-27|2|weekly
+Finish DSA Assignment|Academic|2025-10-27|1|none
+Call Mom|Personal|2025-10-28|3|none
+Weekly Review|Academic|2025-10-20|2|weekly
+Pay Rent|Finance|2025-10-01|1|monthly
 ```
 
 ---
 
-## 🚀 Next Phase: Algorithms & Sorting
+## 🚀 Next Phase: Startup Integration & Display
 
-- Filter tasks for today using system date
-- Sort tasks by priority
-- Add recurrence logic (weekly/monthly)
-- Implement search by title or date
+* Add startup banner and motivational message
+* Display today's tasks automatically on launch
+* Format output for clarity and professionalism
+* Prepare for CLI menu or GUI integration
 
 ---
 
 ## 👨‍💻 Author
 
-**Muhammad Raza**  
+**Muhammad Raza**
 
 ---
