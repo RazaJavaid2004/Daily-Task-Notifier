@@ -59,11 +59,23 @@ bool isToday(const std::tm& date) {
 
 void TaskManager::showTodayTasks() {
     sortByPriority();
-    std::cout << "Today's Tasks:\n";
+
+    std::cout << "📅 Today's Tasks:\n";
+    std::cout << "------------------\n";
+
+    int count = 0;
     for (const auto& task : tasks) {
         if (isToday(task.dueDate) || isRecurringToday(task)) {
-            std::cout << task.toString() << std::endl;
+            std::cout << "🔸 " << task.toString() << std::endl;
+            count++;
         }
+    }
+
+    if (count == 0) {
+        std::cout << "🎉 No tasks for today. Enjoy your free time!\n";
+    } else {
+        std::cout << "\n✅ Total tasks for today: " << count << "\n";
+        std::cout << "💡 Tip: Stay focused, one task at a time.\n";
     }
 }
 
@@ -92,8 +104,15 @@ bool TaskManager::isRecurringToday(const Task& task) const {
 
 void TaskManager::searchByTitle(const std::string& keyword) const {
     std::cout << "Search Results for \"" << keyword << "\":\n";
+
+    std::string loweredKeyword = keyword;
+    std::transform(loweredKeyword.begin(), loweredKeyword.end(), loweredKeyword.begin(), ::tolower);
+
     for (const auto& task : tasks) {
-        if (task.title.find(keyword) != std::string::npos) {
+        std::string loweredTitle = task.title;
+        std::transform(loweredTitle.begin(), loweredTitle.end(), loweredTitle.begin(), ::tolower);
+
+        if (loweredTitle.find(loweredKeyword) != std::string::npos) {
             std::cout << task.toString() << std::endl;
         }
     }
