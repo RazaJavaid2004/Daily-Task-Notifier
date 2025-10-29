@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>701</width>
+    <width>800</width>
     <height>526</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
-    <height>400</height>
+    <width>800</width>
+    <height>500</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -45,44 +45,93 @@
       </property>
      </widget>
     </item>
-<item>
- <layout class="QHBoxLayout" name="taskDetailsLayout">
-  <item>
-   <widget class="QLineEdit" name="categoryInput">
-    <property name="placeholderText">
-     <string>e.g., Work</string>
-    </property>
-   </widget>
-  </item>
-  <item>
-   <widget class="QSpinBox" name="priorityInput">
-    <property name="prefix">
-     <string>Priority: </string>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>5</number>
-    </property>
-   </widget>
-  </item>
-  <item>
-   <widget class="QDateEdit" name="dueDateInput">
-    <property name="calendarPopup">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </item>
-  <item>
-   <widget class="QLineEdit" name="reminderInput">
-    <property name="placeholderText">
-     <string>e.g., Call at 5 PM</string>
-    </property>
-   </widget>
-  </item>
- </layout>
-</item>
+    <item>
+     <layout class="QHBoxLayout" name="taskDetailsLayout">
+      <item>
+       <widget class="QLineEdit" name="categoryInput">
+        <property name="placeholderText">
+         <string>e.g., Work</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="filterCategoryButton">
+        <property name="text">
+         <string>Filter by Category</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="priorityInput">
+        <property name="prefix">
+         <string>Priority: </string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="filterPriorityButton">
+        <property name="text">
+         <string>Filter by Priority</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dueDateInput">
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="filterDateButton">
+        <property name="text">
+         <string>Filter by Date</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="recurrenceInput">
+        <property name="placeholderText">
+         <string>e.g. Daily</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="filterRecurrenceButton">
+        <property name="text">
+         <string>Filter by Recurrence</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="combinedFilterButton">
+      <property name="text">
+       <string>Apply Combined Filters</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="sortByDateButton">
+      <property name="text">
+       <string>Sort by Due Date</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="sortByPriorityButton">
+      <property name="text">
+       <string>Sort by Priority</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QListWidget" name="taskList"/>
     </item>
@@ -93,6 +142,13 @@
       </property>
      </widget>
     </item>
+    <item>
+ <widget class="QPushButton" name="viewAllButton">
+  <property name="text">
+   <string>View All Tasks</string>
+  </property>
+ </widget>
+</item>
     <item>
      <widget class="QPushButton" name="addTaskButton">
       <property name="text">
@@ -107,8 +163,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>701</width>
-     <height>22</height>
+     <width>800</width>
+     <height>17</height>
     </rect>
    </property>
   </widget>
