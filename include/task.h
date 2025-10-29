@@ -11,5 +11,10 @@ public:
     std::string recurrenceType;
 
     Task(std::string t, std::string c, std::tm d, int p, std::string r);
+
     std::string toString() const;
+
+    std::string getTitle() const;
+    int getPriority() const;
+    std::tm getDueDate() const;
 };
