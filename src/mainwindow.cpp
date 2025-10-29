@@ -32,13 +32,6 @@ void MainWindow::onViewTodayClicked()
 void MainWindow::onAddTaskClicked()
 {
     QString input = ui->searchBar->text().trimmed();
-
-    if (input.isEmpty()) {
-        ui->taskList->addItem("⚠️ Please enter a task.");
-        return;
-    }
-
-    QString input = ui->searchBar->text().trimmed();
     QString category = ui->categoryInput->text().trimmed();
     QDate date = ui->dueDateInput->date();
     int priority = ui->priorityInput->value();
@@ -67,10 +60,4 @@ void MainWindow::onAddTaskClicked()
     ui->searchBar->clear();
     ui->categoryInput->clear();
     ui->reminderInput->clear();
-
-    Task newTask(title, category, dueDate, priority, reminder);
-    taskManager.addTask(newTask);
-
-    ui->taskList->addItem("✅ Task added: " + input);
-    ui->searchBar->clear();
 }
