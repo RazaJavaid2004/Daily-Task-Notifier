@@ -31,6 +31,46 @@ void MainWindow::onViewTodayClicked()
 
 void MainWindow::onAddTaskClicked()
 {
-    ui->taskList->clear();
-    ui->taskList->addItem("➕ Add Task clicked");
+    QString input = ui->searchBar->text().trimmed();
+
+    if (input.isEmpty()) {
+        ui->taskList->addItem("⚠️ Please enter a task.");
+        return;
+    }
+
+    QString input = ui->searchBar->text().trimmed();
+    QString category = ui->categoryInput->text().trimmed();
+    QDate date = ui->dueDateInput->date();
+    int priority = ui->priorityInput->value();
+    QString reminder = ui->reminderInput->text().trimmed();
+
+    if (input.isEmpty()) {
+        ui->taskList->addItem("⚠️ Please enter a task.");
+        return;
+    }
+
+    std::tm dueDate = {};
+    dueDate.tm_year = date.year() - 1900;
+    dueDate.tm_mon = date.month() - 1;
+    dueDate.tm_mday = date.day();
+
+    Task newTask(
+        input.toStdString(),
+        category.toStdString(),
+        dueDate,
+        priority,
+        reminder.toStdString()
+        );
+
+    taskManager.addTask(newTask);
+    ui->taskList->addItem("✅ Task added: " + input);
+    ui->searchBar->clear();
+    ui->categoryInput->clear();
+    ui->reminderInput->clear();
+
+    Task newTask(title, category, dueDate, priority, reminder);
+    taskManager.addTask(newTask);
+
+    ui->taskList->addItem("✅ Task added: " + input);
+    ui->searchBar->clear();
 }
