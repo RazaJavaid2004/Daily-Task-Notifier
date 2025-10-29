@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include "taskManager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,4 +24,5 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    TaskManager taskManager;
 };
