@@ -45,6 +45,44 @@
       </property>
      </widget>
     </item>
+<item>
+ <layout class="QHBoxLayout" name="taskDetailsLayout">
+  <item>
+   <widget class="QLineEdit" name="categoryInput">
+    <property name="placeholderText">
+     <string>e.g., Work</string>
+    </property>
+   </widget>
+  </item>
+  <item>
+   <widget class="QSpinBox" name="priorityInput">
+    <property name="prefix">
+     <string>Priority: </string>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>5</number>
+    </property>
+   </widget>
+  </item>
+  <item>
+   <widget class="QDateEdit" name="dueDateInput">
+    <property name="calendarPopup">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </item>
+  <item>
+   <widget class="QLineEdit" name="reminderInput">
+    <property name="placeholderText">
+     <string>e.g., Call at 5 PM</string>
+    </property>
+   </widget>
+  </item>
+ </layout>
+</item>
     <item>
      <widget class="QListWidget" name="taskList"/>
     </item>
