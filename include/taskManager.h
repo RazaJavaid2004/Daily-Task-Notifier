@@ -16,4 +16,5 @@ public:
     void showTodayTasks();
     void sortByPriority();
     void searchByTitle(const std::string& keyword) const;
+    std::vector<Task> getAllTasks() const;
 };
