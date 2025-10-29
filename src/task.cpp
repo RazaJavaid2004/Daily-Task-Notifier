@@ -12,3 +12,16 @@ std::string Task::toString() const {
         << priority << "|" << recurrenceType;
     return oss.str();
 }
+
+// ✅ Properly scoped getters
+std::string Task::getTitle() const {
+    return title;
+}
+
+int Task::getPriority() const {
+    return priority;
+}
+
+std::tm Task::getDueDate() const {
+    return dueDate;
+}
