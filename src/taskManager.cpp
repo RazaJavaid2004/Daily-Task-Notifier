@@ -4,6 +4,8 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
+#include <QDir>
+#include <QCoreApplication>
 
 void TaskManager::loadTasks(const std::string& filename) {
     std::ifstream file(filename);
@@ -41,6 +43,21 @@ void TaskManager::saveTasks(const std::string& filename) {
 
 void TaskManager::addTask(const Task& task) {
     tasks.push_back(task);
+
+    QString rootPath = QCoreApplication::applicationDirPath(); // build/debug folder
+    QDir projectRoot(rootPath);
+    projectRoot.cdUp();
+    projectRoot.cdUp();
+    QString filePath = projectRoot.filePath("data/tasks.txt");
+
+    std::ofstream file(filePath.toStdString(), std::ios::app);
+
+    if (file.is_open()) {
+        file << task.toString() << "\n";
+        file.close();
+    } else {
+        std::cerr << "❌ Failed to open tasks.txt at: " << filePath.toStdString() << "\n";
+    }
 }
 
 void TaskManager::listAllTasks() const {
