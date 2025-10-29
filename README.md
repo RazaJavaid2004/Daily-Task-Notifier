@@ -9,13 +9,14 @@ A lightweight desktop application that displays your routine tasks for the day u
 * **Language** : C++
 * **Purpose** : Help users remember daily routine tasks by showing them at system startup
 * **Scope** : Console-based app with file I/O, task filtering, recurrence logic, and priority sorting
-* **Status** : Phase 3 completed ✅
+* **Status** : Phase 4 completed ✅
 
 ---
 
 ## 📁 Project Structure
 
 ```
+
 /DailyTaskNotifier
 │
 ├── include/                     # Header files (interfaces)
@@ -31,6 +32,7 @@ A lightweight desktop application that displays your routine tasks for the day u
 │   └── tasks.txt                # Task data file (text format)
 │
 ├── README.md                    # Project documentation
+
 ```
 
 ---
@@ -39,11 +41,11 @@ A lightweight desktop application that displays your routine tasks for the day u
 
 | Structure                             | Purpose                                                 |
 | ------------------------------------- | ------------------------------------------------------- |
-| `class Task`                        | Encapsulates task details (title, date, priority, etc.) |
-| `std::vector<Task>`                 | Stores all tasks dynamically                            |
-| `std::map` *(planned)*            | Group tasks by date or category                         |
-| `std::priority_queue` *(planned)* | Sort tasks by urgency                                   |
-| `std::ifstream`/`std::ofstream`   | File I/O for persistent storage                         |
+| `class Task`                          | Encapsulates task details (title, date, priority, etc.) |
+| `std::vector<Task>`                   | Stores all tasks dynamically                            |
+| `std::map` *(planned)*                | Group tasks by date or category                         |
+| `std::priority_queue` *(planned)*     | Sort tasks by urgency                                   |
+| `std::ifstream` / `std::ofstream`     | File I/O for persistent storage                         |
 
 ---
 
@@ -51,16 +53,16 @@ A lightweight desktop application that displays your routine tasks for the day u
 
 | Algorithm          | Purpose                                                 |
 | ------------------ | ------------------------------------------------------- |
-| Date parsing       | Converts string to `std::tm`for comparison            |
-| Task serialization | Converts task to string format for saving               |
-| File parsing       | Reads tasks from `tasks.txt`and loads into memory     |
-| Recurrence logic   | Supports `none`,`weekly`, and `monthly`recurrence |
-| Priority sorting   | Sorts tasks in ascending order of urgency               |
-| Title search       | Finds tasks by keyword match                            |
+| Date parsing       | Converts string to `std::tm` for comparison             |
+| Task serialization | Converts task to string format for saving              |
+| File parsing       | Reads tasks from `tasks.txt` and loads into memory     |
+| Recurrence logic   | Supports `none`, `weekly`, and `monthly` recurrence    |
+| Priority sorting   | Sorts tasks in ascending order of urgency              |
+| Title search       | Finds tasks by keyword match (case-insensitive)        |
 
 ---
 
-## ✅ Features Completed (Phase 1–3)
+## ✅ Features Completed (Phase 1–4)
 
 * [X] Finalized project scope and DSA plan
 * [X] Designed `Task` class with serialization
@@ -71,29 +73,35 @@ A lightweight desktop application that displays your routine tasks for the day u
   * Task filtering by today's date
   * Recurrence support (`weekly`, `monthly`)
   * Priority-based sorting
-  * Keyword search by title
+  * Case-insensitive keyword search by title
+* [X] Startup banner and motivational message
+* [X] Formatted display of today's tasks with task count
+* [X] CLI menu with interactive options
 
 ---
 
 ## 📦 Sample Task Format (`tasks.txt`)
 
 ```
+
 Title|Category|YYYY-MM-DD|Priority|RecurrenceType
 Water Plants|Personal|2025-10-27|2|weekly
 Finish DSA Assignment|Academic|2025-10-27|1|none
 Call Mom|Personal|2025-10-28|3|none
 Weekly Review|Academic|2025-10-20|2|weekly
 Pay Rent|Finance|2025-10-01|1|monthly
+
 ```
 
 ---
 
-## 🚀 Next Phase: Startup Integration & Display
+## 🚀 Next Phase: GUI Integration
 
-* Add startup banner and motivational message
-* Display today's tasks automatically on launch
-* Format output for clarity and professionalism
-* Prepare for CLI menu or GUI integration
+* Choose GUI framework (Qt, ImGui, etc.)
+* Display task list in graphical interface
+* Add search bar, filters, and task creation form
+* Connect GUI elements to backend logic
+* Ensure emoji rendering and startup polish
 
 ---
 
