@@ -134,3 +134,7 @@ void TaskManager::searchByTitle(const std::string& keyword) const {
         }
     }
 }
+
+std::vector<Task> TaskManager::getAllTasks() const {
+    return tasks;
+}
