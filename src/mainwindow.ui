@@ -133,6 +133,13 @@
      </widget>
     </item>
     <item>
+ <widget class="QCheckBox" name="showArchivedCheckBox">
+  <property name="text">
+   <string>Show Archived Tasks</string>
+  </property>
+ </widget>
+</item>
+    <item>
      <widget class="QListWidget" name="taskList"/>
     </item>
     <item>
@@ -142,20 +149,6 @@
       </property>
      </widget>
     </item>
-    <item>
- <widget class="QPushButton" name="viewAllButton">
-  <property name="text">
-   <string>View All Tasks</string>
-  </property>
- </widget>
-</item>
-<item>
- <widget class="QPushButton" name="viewArchivedButton">
-  <property name="text">
-   <string>View Archived</string>
-  </property>
- </widget>
-</item>
     <item>
      <widget class="QPushButton" name="addTaskButton">
       <property name="text">
