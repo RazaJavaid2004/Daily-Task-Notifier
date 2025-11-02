@@ -1,24 +1,58 @@
-# Build artifacts
+# 🛠️ Build artifacts
 *.exe
 *.obj
 *.o
 *.out
 *.log
+*.a
+*.so
+*.dll
 
-# IDE files
+# 🧰 IDE files
 .vscode/
 *.sln
 *.vcxproj*
 *.user
 *.DS_Store
+*.pro.user
+*.qmake.stash
+*.autosave
 
-# Backup files
+# 🔙 Backup and temp files
 *~
 *.bak
+*.swp
+*.tmp
 
-# OS-specific
+# 🖥️ OS-specific files
 Thumbs.db
 desktop.ini
 
-# Data files
+# 🧱 Qt build system
+Makefile*
+CMakeLists.txt.user
+build-*/
+
+# 📦 Qt Creator generated folders
+*.pro.user.*
+*.pro.user
+*.qbs.user
+*.qbs.user.*
+
+# 📁 Data files
 data/tasks.txt
+
+# 📷 Image cache or previews
+*.png
+*.jpg
+*.svg
+*.ico
+
+# 🧪 Test output
+test_output/
+*.testlog
+
+# 📄 Misc
+*.log
+*.trace
+*.stackdump
