@@ -13,24 +13,24 @@ void TaskManager::loadTasks(const std::string& filename) {
 
     while (std::getline(file, line)) {
         std::istringstream iss(line);
-        std::string title, category, dateStr;
+        std::string title, category, dateStr, priorityStr, recurrenceType, completedStr;
         int priority;
-        std::string recurrenceType;
 
         std::getline(iss, title, '|');
         std::getline(iss, category, '|');
         std::getline(iss, dateStr, '|');
-        std::string priorityStr;
         std::getline(iss, priorityStr, '|');
         std::getline(iss, recurrenceType, '|');
+        std::getline(iss, completedStr, '|');
 
         priority = std::stoi(priorityStr);
+        bool completed = (completedStr == "1");
 
         std::tm date = {};
         std::istringstream dateStream(dateStr);
         dateStream >> std::get_time(&date, "%Y-%m-%d");
 
-        tasks.emplace_back(title, category, date, priority, recurrenceType);
+        tasks.emplace_back(title, category, date, priority, recurrenceType, completed);
     }
 }
 
@@ -137,4 +137,14 @@ void TaskManager::searchByTitle(const std::string& keyword) const {
 
 std::vector<Task> TaskManager::getAllTasks() const {
     return tasks;
+}
+
+void TaskManager::markTaskCompleted(const std::string& title)
+{
+    for (Task& task : tasks) {
+        if (task.getTitle() == title) {
+            task.setCompleted(true);
+            break;
+        }
+    }
 }
