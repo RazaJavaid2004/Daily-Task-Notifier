@@ -9,6 +9,7 @@ public:
     std::tm dueDate;
     int priority;
     std::string recurrenceType;
+    bool isCompleted;
 
     Task(const std::string& title,
                const std::string& category,
@@ -22,7 +23,6 @@ public:
     std::string getTitle() const;
     int getPriority() const;
     std::tm getDueDate() const;
-    bool isCompleted;
     bool getCompleted() const;
     void setCompleted(bool completed);
 };
