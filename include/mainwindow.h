@@ -36,12 +36,13 @@ private slots:
     void onResetFiltersClicked();
     void resetCurrentViewBase();
     void onViewArchivedClicked();
+    void onArchivedToggleChanged(int state);
 
 private:
     Ui::MainWindow *ui;
     TaskManager taskManager;
     std::vector<Task> currentViewTasks;
 
-    enum ViewMode { VIEW_ALL, VIEW_TODAY };
+    enum ViewMode { VIEW_ALL, VIEW_TODAY, VIEW_ARCHIVED };
     ViewMode currentViewMode = VIEW_ALL;
 };
