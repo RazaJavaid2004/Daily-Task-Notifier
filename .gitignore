@@ -42,12 +42,6 @@ build-*/
 # 📁 Data files
 data/tasks.txt
 
-# 📷 Image cache or previews
-*.png
-*.jpg
-*.svg
-*.ico
-
 # 🧪 Test output
 test_output/
 *.testlog
