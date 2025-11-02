@@ -10,11 +10,19 @@ public:
     int priority;
     std::string recurrenceType;
 
-    Task(std::string t, std::string c, std::tm d, int p, std::string r);
+    Task(const std::string& title,
+               const std::string& category,
+               const std::tm& dueDate,
+               int priority,
+               const std::string& recurrenceType,
+               bool isCompleted = false);
 
     std::string toString() const;
 
     std::string getTitle() const;
     int getPriority() const;
     std::tm getDueDate() const;
+    bool isCompleted;
+    bool getCompleted() const;
+    void setCompleted(bool completed);
 };
