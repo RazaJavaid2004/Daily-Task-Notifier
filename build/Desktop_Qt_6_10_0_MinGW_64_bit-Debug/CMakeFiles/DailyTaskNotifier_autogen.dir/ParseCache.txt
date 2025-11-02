@@ -422,8 +422,8 @@ D:/Daily-Task-Notifier/include/mainwindow.h
  mdp:D:/Programs/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h
 D:/Daily-Task-Notifier/include/task.h
 D:/Daily-Task-Notifier/include/taskManager.h
-D:/Daily-Task-Notifier/src/main.cpp
+D:/Daily-Task-Notifier/src/task.cpp
 D:/Daily-Task-Notifier/src/mainwindow.cpp
  uic:ui_mainwindow.h
-D:/Daily-Task-Notifier/src/task.cpp
+D:/Daily-Task-Notifier/src/main.cpp
 D:/Daily-Task-Notifier/src/taskManager.cpp

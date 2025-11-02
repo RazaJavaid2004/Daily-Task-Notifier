@@ -64,3 +64,13 @@
 115	477	7838096636187046	D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug/DailyTaskNotifier_autogen/mocs_compilation.cpp	f171b2eff68aa8bf
 45	6935	7838096662402519	CMakeFiles/DailyTaskNotifier.dir/src/mainwindow.cpp.obj	68cface079b2f9c3
 6938	7683	7838096731328551	DailyTaskNotifier.exe	962de5c65e41e167
+124	639	7838117093477440	DailyTaskNotifier_autogen/timestamp	f171b2eff68aa8bf
+124	639	7838117093477440	DailyTaskNotifier_autogen/mocs_compilation.cpp	f171b2eff68aa8bf
+124	639	7838117093477440	D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug/DailyTaskNotifier_autogen/timestamp	f171b2eff68aa8bf
+124	639	7838117093477440	D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug/DailyTaskNotifier_autogen/mocs_compilation.cpp	f171b2eff68aa8bf
+657	3915	7838117098797469	CMakeFiles/DailyTaskNotifier.dir/src/task.cpp.obj	80452dde2cc0c2ea
+664	12038	7838117098867458	CMakeFiles/DailyTaskNotifier.dir/src/taskManager.cpp.obj	7cc2493ac3663a8b
+645	13221	7838117098687586	CMakeFiles/DailyTaskNotifier.dir/src/main.cpp.obj	44dd96864ac1cbaa
+640	13239	7838117098637441	CMakeFiles/DailyTaskNotifier.dir/DailyTaskNotifier_autogen/mocs_compilation.cpp.obj	42e9b43ad9682a59
+651	15335	7838117098737477	CMakeFiles/DailyTaskNotifier.dir/src/mainwindow.cpp.obj	68cface079b2f9c3
+15335	16040	7838117245589119	DailyTaskNotifier.exe	962de5c65e41e167
