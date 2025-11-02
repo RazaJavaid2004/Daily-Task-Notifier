@@ -17,5 +17,8 @@ public:
     void sortByPriority();
     void searchByTitle(const std::string& keyword) const;
     std::vector<Task> getAllTasks() const;
-    void markTaskCompleted(const std::string& title);
+    bool markTaskCompleted(const std::string& title);
+    std::string getDataFilePath() const;
+    std::string getArchivedFilePath() const;
+    void overwriteTasks(const std::vector<Task>& updatedTasks);
 };
