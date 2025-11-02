@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->markCompletedButton, &QPushButton::clicked, this, &MainWindow::onMarkCompletedClicked);
     connect(ui->archiveCompletedButton, &QPushButton::clicked, this, &MainWindow::onArchiveCompletedClicked);
     connect(ui->resetFiltersButton, &QPushButton::clicked, this, &MainWindow::onResetFiltersClicked);
-    connect(ui->showArchivedCheckBox, &QCheckBox::checkStateChanged, this, &MainWindow::onArchivedToggleChanged);
+    connect(ui->viewCompletedCheckBox, &QCheckBox::checkStateChanged, this, &MainWindow::onArchivedToggleChanged);
 
     // Resolve path to tasks.txt
     QString rootPath = QCoreApplication::applicationDirPath();
@@ -832,7 +832,7 @@ void MainWindow::resetCurrentViewBase()
     }
 }
 
-void MainWindow::onViewArchivedClicked()
+void MainWindow::onViewCompletedClicked()
 {
     ui->taskList->clear();
     currentViewTasks.clear();
