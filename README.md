@@ -99,7 +99,7 @@ A lightweight desktop application that displays your routine tasks for the day u
 
 Here’s a snapshot of the Daily Task Notifier in action:
 
-![Daily Task Notifier GUI](images/gui_screenshot.png)
+![Daily Task Notifier GUI](images/gui_screenshot.PNG)
 
 ---
 
