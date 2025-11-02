@@ -35,7 +35,7 @@ void TaskManager::loadTasks(const std::string& filename) {
 }
 
 void TaskManager::saveTasks(const std::string& filename) {
-    std::ofstream file(filename);
+    std::ofstream file(getDataFilePath());
     for (const auto& task : tasks) {
         file << task.toString() << "\n";
     }
@@ -139,12 +139,38 @@ std::vector<Task> TaskManager::getAllTasks() const {
     return tasks;
 }
 
-void TaskManager::markTaskCompleted(const std::string& title)
-{
+bool TaskManager::markTaskCompleted(const std::string& title) {
     for (Task& task : tasks) {
         if (task.getTitle() == title) {
             task.setCompleted(true);
-            break;
+            return true;
         }
+    }
+    return false;
+}
+
+std::string TaskManager::getDataFilePath() const {
+    QString rootPath = QCoreApplication::applicationDirPath();
+    QDir projectRoot(rootPath);
+    projectRoot.cdUp();
+    projectRoot.cdUp();
+    QString filePath = projectRoot.filePath("data/tasks.txt");
+    return filePath.toStdString();
+}
+
+std::string TaskManager::getArchivedFilePath() const {
+    QString rootPath = QCoreApplication::applicationDirPath();
+    QDir projectRoot(rootPath);
+    projectRoot.cdUp();
+    projectRoot.cdUp();
+    QString filePath = projectRoot.filePath("data/archived_tasks.txt");
+    return filePath.toStdString();
+}
+
+void TaskManager::overwriteTasks(const std::vector<Task>& updatedTasks) {
+    tasks = updatedTasks;
+    std::ofstream file(getDataFilePath());
+    for (const auto& task : tasks) {
+        file << task.toString() << "\n";
     }
 }
