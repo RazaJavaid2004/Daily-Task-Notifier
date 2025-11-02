@@ -1,0 +1,42 @@
+# Normalize all text files to LF line endings
+* text=auto eol=lf
+
+# Treat Qt Designer UI files as UTF-8 text
+*.ui text
+
+# Treat C++ source and header files as text
+*.cpp text
+*.h text
+*.hpp text
+
+# Treat build scripts and config files as text
+*.pro text
+*.pri text
+*.cmake text
+CMakeLists.txt text
+
+# Treat markdown and documentation files as text
+*.md text
+*.txt text
+
+# Treat images and icons as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg binary
+*.ico binary
+
+# Treat compiled files and executables as binary
+*.exe binary
+*.dll binary
+*.so binary
+*.a binary
+*.o binary
+*.obj binary
+
+# Treat logs and backups as text
+*.log text
+*.bak text
+
+# Ignore merge conflicts in UI files (optional)
+*.ui merge=union
