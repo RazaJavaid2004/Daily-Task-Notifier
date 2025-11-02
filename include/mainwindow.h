@@ -35,7 +35,7 @@ private slots:
     void onArchiveCompletedClicked();
     void onResetFiltersClicked();
     void resetCurrentViewBase();
-    void onViewArchivedClicked();
+    void onViewCompletedClicked();
     void onArchivedToggleChanged(int state);
 
 private:
