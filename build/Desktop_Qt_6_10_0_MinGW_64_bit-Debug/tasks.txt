@@ -1,0 +1,9 @@
+Water Plants|Personal|2025-10-27|2|weekly|0
+Finish DSA Assignment|Academic|2025-10-27|1|none|1
+Call Mom|Personal|2025-10-28|3|none|0
+Weekly Review|Academic|2025-10-20|2|weekly|0
+Pay Rent|Finance|2025-10-27|1|monthly|0
+Finish Work|Work|2025-10-30|3|none|0
+report writing|Work|2025-10-30|3|none|0
+Finish|Work|2025-10-30|3|none|0
+TryHackMe|Work|2025-10-29|1|daily|0

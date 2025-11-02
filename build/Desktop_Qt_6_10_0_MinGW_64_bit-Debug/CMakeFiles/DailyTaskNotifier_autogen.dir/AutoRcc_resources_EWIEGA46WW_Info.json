@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug/DailyTaskNotifier_autogen",
+	"CMAKE_BINARY_DIR" : "D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "D:/Daily-Task-Notifier",
+	"CMAKE_SOURCE_DIR" : "D:/Daily-Task-Notifier",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug/DailyTaskNotifier_autogen/include",
+	"INPUTS" : [],
+	"LOCK_FILE" : "D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug/CMakeFiles/DailyTaskNotifier_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "D:/Programs/Qt/6.10.0/mingw_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "D:/Daily-Task-Notifier/build/Desktop_Qt_6_10_0_MinGW_64_bit-Debug/CMakeFiles/DailyTaskNotifier_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "D:/Daily-Task-Notifier/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}
