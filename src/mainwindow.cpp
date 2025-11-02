@@ -8,10 +8,44 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    qApp->setStyleSheet(R"(
+    QWidget {
+        font-family: Segoe UI, sans-serif;
+        font-size: 10pt;
+    }
+
+    QPushButton {
+        background-color: #0078D7;
+        color: white;
+        border-radius: 4px;
+        padding: 6px 12px;
+    }
+
+    QPushButton:hover {
+        background-color: #005A9E;
+    }
+
+    QLineEdit, QComboBox {
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    QListWidget {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 4px;
+    }
+
+    QCheckBox {
+        spacing: 6px;
+    }
+)");
+
+
     // Connect buttons
     connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::onSearchClicked);
     connect(ui->viewTodayButton, &QPushButton::clicked, this, &MainWindow::onViewTodayClicked);
-    connect(ui->viewAllButton, &QPushButton::clicked, this, &MainWindow::onViewAllClicked);
     connect(ui->addTaskButton, &QPushButton::clicked, this, &MainWindow::onAddTaskClicked);
     connect(ui->filterPriorityButton, &QPushButton::clicked, this, &MainWindow::onFilterByPriorityClicked);
     connect(ui->filterCategoryButton, &QPushButton::clicked, this, &MainWindow::onFilterByCategoryClicked);
@@ -24,16 +58,18 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->markCompletedButton, &QPushButton::clicked, this, &MainWindow::onMarkCompletedClicked);
     connect(ui->archiveCompletedButton, &QPushButton::clicked, this, &MainWindow::onArchiveCompletedClicked);
     connect(ui->resetFiltersButton, &QPushButton::clicked, this, &MainWindow::onResetFiltersClicked);
-    connect(ui->viewArchivedButton, &QPushButton::clicked, this, &MainWindow::onViewArchivedClicked);
+    connect(ui->showArchivedCheckBox, &QCheckBox::checkStateChanged, this, &MainWindow::onArchivedToggleChanged);
 
     // Resolve path to tasks.txt
     QString rootPath = QCoreApplication::applicationDirPath();
     QDir projectRoot(rootPath);
     projectRoot.cdUp(); projectRoot.cdUp();
     QString filePath = projectRoot.filePath("data/tasks.txt");
+    QString archivedPath = projectRoot.filePath("data/archived_tasks.txt");
 
     // Load tasks and initialize view
     taskManager.loadTasks(filePath.toStdString());
+    taskManager.loadTasks(archivedPath.toStdString());
     currentViewTasks = taskManager.getAllTasks();
 
     // Display each task manually with recurrence awareness
@@ -635,11 +671,13 @@ void MainWindow::onMarkCompletedClicked()
     QString selectedText = selectedItem->text();
     bool found = false;
 
-    for (const Task& task : currentViewTasks) {
+    for (const Task& task : taskManager.getAllTasks()) {
         QString title = QString::fromStdString(task.getTitle());
         if (selectedText.contains(title)) {
-            taskManager.markTaskCompleted(task.getTitle());
-            found = true;
+            if (taskManager.markTaskCompleted(task.getTitle())) {
+                taskManager.saveTasks(taskManager.getDataFilePath());
+                found = true;
+            }
             break;
         }
     }
@@ -710,16 +748,23 @@ void MainWindow::onArchiveCompletedClicked()
                 << (task.category.empty() ? "Uncategorized" : QString::fromStdString(task.category)) << "|"
                 << dueDate.toString("yyyy-MM-dd") << "|"
                 << task.getPriority() << "|"
-                << QString::fromStdString(task.recurrenceType) << "\n";
+                << QString::fromStdString(task.recurrenceType) << "|1\n";
         } else {
             remainingTasks.push_back(task);
         }
     }
 
+    taskManager.overwriteTasks(remainingTasks);  // ✅ Remove archived from tasks.txt
     currentViewTasks = remainingTasks;
     file.close();
+
+    taskManager.loadTasks(taskManager.getArchivedFilePath());  // ✅ Reload archived tasks
+    currentViewMode = VIEW_ARCHIVED;                            // ✅ Switch to archived view
+    resetCurrentViewBase();                                     // ✅ Refresh UI
+
     ui->taskList->addItem("📦 Archived completed tasks.");
 }
+
 
 void MainWindow::onResetFiltersClicked()
 {
@@ -778,6 +823,12 @@ void MainWindow::resetCurrentViewBase()
 
             if (show) currentViewTasks.push_back(task);
         }
+    } else if (currentViewMode == VIEW_ARCHIVED) {
+        for (const Task& task : taskManager.getAllTasks()) {
+            if (task.getCompleted()) {
+                currentViewTasks.push_back(task);
+            }
+        }
     }
 }
 
@@ -785,7 +836,7 @@ void MainWindow::onViewArchivedClicked()
 {
     ui->taskList->clear();
     currentViewTasks.clear();
-    currentViewMode = VIEW_ALL;  // Archived view is global
+    currentViewMode = VIEW_ALL;
 
     for (const Task& task : taskManager.getAllTasks()) {
         if (task.getCompleted()) {
@@ -822,5 +873,54 @@ void MainWindow::onViewArchivedClicked()
 
     if (currentViewTasks.empty()) {
         ui->taskList->addItem("📁 No archived tasks found.");
+    }
+}
+
+void MainWindow::onArchivedToggleChanged(int state)
+{
+    // Step 1: Set the view mode
+    if (state == Qt::Checked) {
+        currentViewMode = VIEW_ARCHIVED;
+    } else {
+        currentViewMode = VIEW_ALL;
+    }
+
+    // Step 2: Rebuild the current view
+    resetCurrentViewBase();     // Updates currentViewTasks
+    ui->taskList->clear();      // Clears the list widget
+
+    // Step 3: Display tasks
+    if (currentViewTasks.empty()) {
+        ui->taskList->addItem("📭 No tasks to show.");
+    } else {
+        for (const Task& task : currentViewTasks) {
+            QDate dueDate(task.dueDate.tm_year + 1900, task.dueDate.tm_mon + 1, task.dueDate.tm_mday);
+            QString recurrence = QString::fromStdString(task.recurrenceType).toLower();
+            QString recurrenceLabel;
+
+            if (recurrence == "weekly" || recurrence == "monthly" || recurrence == "daily") {
+                recurrenceLabel = QString(" 🔁 (%1)").arg(recurrence);
+            }
+
+            QString priorityColor;
+            switch (task.getPriority()) {
+            case 1: priorityColor = "🔴"; break;
+            case 2: priorityColor = "🟠"; break;
+            case 3: priorityColor = "🟡"; break;
+            case 4: priorityColor = "🟢"; break;
+            case 5: priorityColor = "🔵"; break;
+            default: priorityColor = "⚪"; break;
+            }
+
+            QString display = QString("%1 %2 📌 %3 (Due: %4, Priority: %5)%6")
+                                  .arg(task.getCompleted() ? "✅" : "")
+                                  .arg(priorityColor)
+                                  .arg(QString::fromStdString(task.getTitle()))
+                                  .arg(dueDate.toString("dd MMM yyyy"))
+                                  .arg(task.getPriority())
+                                  .arg(recurrenceLabel);
+
+            ui->taskList->addItem(display.trimmed());
+        }
     }
 }
