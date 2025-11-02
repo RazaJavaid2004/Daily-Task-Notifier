@@ -149,6 +149,13 @@
   </property>
  </widget>
 </item>
+<item>
+ <widget class="QPushButton" name="viewArchivedButton">
+  <property name="text">
+   <string>View Archived</string>
+  </property>
+ </widget>
+</item>
     <item>
      <widget class="QPushButton" name="addTaskButton">
       <property name="text">
@@ -156,6 +163,34 @@
       </property>
      </widget>
     </item>
+    <item>
+ <widget class="QPushButton" name="exportButton">
+  <property name="text">
+   <string>Export Current View</string>
+  </property>
+ </widget>
+</item>
+<item>
+ <widget class="QPushButton" name="markCompletedButton">
+  <property name="text">
+   <string>Mark Selected as Completed</string>
+  </property>
+ </widget>
+</item>
+<item>
+ <widget class="QPushButton" name="archiveCompletedButton">
+  <property name="text">
+   <string>Archive Completed Tasks</string>
+  </property>
+ </widget>
+</item>
+<item>
+ <widget class="QPushButton" name="resetFiltersButton">
+  <property name="text">
+   <string>Reset Filters</string>
+  </property>
+ </widget>
+</item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
