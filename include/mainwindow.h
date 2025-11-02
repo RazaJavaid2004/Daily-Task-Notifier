@@ -30,9 +30,18 @@ private slots:
     void onSortByDateClicked();
     void onSortByPriorityClicked();
     void onViewAllClicked();
+    void onExportClicked();
+    void onMarkCompletedClicked();
+    void onArchiveCompletedClicked();
+    void onResetFiltersClicked();
+    void resetCurrentViewBase();
+    void onViewArchivedClicked();
 
 private:
     Ui::MainWindow *ui;
     TaskManager taskManager;
     std::vector<Task> currentViewTasks;
+
+    enum ViewMode { VIEW_ALL, VIEW_TODAY };
+    ViewMode currentViewMode = VIEW_ALL;
 };
