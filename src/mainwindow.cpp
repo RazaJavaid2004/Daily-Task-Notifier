@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDir>
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -218,7 +219,7 @@ void MainWindow::onAddTaskClicked()
         return;
     }
 
-    std::tm dueDate = {};
+    tm dueDate = {};
     dueDate.tm_year = date.year() - 1900;
     dueDate.tm_mon = date.month() - 1;
     dueDate.tm_mday = date.day();
@@ -246,7 +247,7 @@ void MainWindow::onFilterByPriorityClicked()
 
     int selectedPriority = ui->priorityInput->value();
     bool found = false;
-    std::vector<Task> filteredTasks;
+    vector<Task> filteredTasks;
 
     for (const Task& task : currentViewTasks) {
         if (task.getPriority() == selectedPriority) {
@@ -302,7 +303,7 @@ void MainWindow::onFilterByCategoryClicked()
     resetCurrentViewBase();
 
     bool found = false;
-    std::vector<Task> filteredTasks;
+    vector<Task> filteredTasks;
 
     for (const Task& task : currentViewTasks) {
         QString category = QString::fromStdString(task.category).toLower();
@@ -353,7 +354,7 @@ void MainWindow::onFilterByDateClicked()
 
     QDate selectedDate = ui->dueDateInput->date();
     bool found = false;
-    std::vector<Task> filteredTasks;
+    vector<Task> filteredTasks;
 
     for (const Task& task : currentViewTasks) {
         QDate dueDate(task.dueDate.tm_year + 1900, task.dueDate.tm_mon + 1, task.dueDate.tm_mday);
@@ -408,7 +409,7 @@ void MainWindow::onFilterByRecurrenceClicked()
     }
 
     bool found = false;
-    std::vector<Task> filteredTasks;
+    vector<Task> filteredTasks;
 
     for (const Task& task : currentViewTasks) {
         QString recurrence = QString::fromStdString(task.recurrenceType).toLower();
@@ -449,7 +450,7 @@ void MainWindow::onFilterByRecurrenceClicked()
 
 void MainWindow::onCombinedFilterClicked()
 {
-    std::vector<Task> filteredTasks;
+    vector<Task> filteredTasks;
     ui->taskList->clear();
     resetCurrentViewBase();
 
@@ -516,9 +517,9 @@ void MainWindow::onSortByDateClicked()
     ui->taskList->clear();
     resetCurrentViewBase();
 
-    std::vector<Task> tasks = currentViewTasks;
-    std::sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
-        return std::mktime(const_cast<std::tm*>(&a.dueDate)) < std::mktime(const_cast<std::tm*>(&b.dueDate));
+    vector<Task> tasks = currentViewTasks;
+    sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
+        return mktime(const_cast<tm*>(&a.dueDate)) < mktime(const_cast<tm*>(&b.dueDate));
     });
     currentViewTasks = tasks;
 
@@ -557,8 +558,8 @@ void MainWindow::onSortByPriorityClicked()
     ui->taskList->clear();
     resetCurrentViewBase();
 
-    std::vector<Task> tasks = currentViewTasks;
-    std::sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
+    vector<Task> tasks = currentViewTasks;
+    sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
         return a.getPriority() < b.getPriority();
     });
     currentViewTasks = tasks;
@@ -739,7 +740,7 @@ void MainWindow::onArchiveCompletedClicked()
     }
 
     QTextStream out(&file);
-    std::vector<Task> remainingTasks;
+    vector<Task> remainingTasks;
 
     for (const Task& task : currentViewTasks) {
         if (task.getCompleted()) {
@@ -754,13 +755,13 @@ void MainWindow::onArchiveCompletedClicked()
         }
     }
 
-    taskManager.overwriteTasks(remainingTasks);  // ✅ Remove archived from tasks.txt
+    taskManager.overwriteTasks(remainingTasks);
     currentViewTasks = remainingTasks;
     file.close();
 
-    taskManager.loadTasks(taskManager.getArchivedFilePath());  // ✅ Reload archived tasks
-    currentViewMode = VIEW_ARCHIVED;                            // ✅ Switch to archived view
-    resetCurrentViewBase();                                     // ✅ Refresh UI
+    taskManager.loadTasks(taskManager.getArchivedFilePath());  // Reload archived tasks
+    currentViewMode = VIEW_ARCHIVED;                            // Switch to archived view
+    resetCurrentViewBase();                                     // Refresh UI
 
     ui->taskList->addItem("📦 Archived completed tasks.");
 }
