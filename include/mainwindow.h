@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include "taskManager.h"
 #include <QDir>
+using namespace std;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -41,7 +42,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     TaskManager taskManager;
-    std::vector<Task> currentViewTasks;
+    vector<Task> currentViewTasks;
 
     enum ViewMode { VIEW_ALL, VIEW_TODAY, VIEW_ARCHIVED };
     ViewMode currentViewMode = VIEW_ALL;
