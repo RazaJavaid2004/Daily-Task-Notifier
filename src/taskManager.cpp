@@ -6,36 +6,37 @@
 #include <algorithm>
 #include <QDir>
 #include <QCoreApplication>
+using namespace std;
 
-void TaskManager::loadTasks(const std::string& filename) {
-    std::ifstream file(filename);
-    std::string line;
+void TaskManager::loadTasks(const string& filename) {
+    ifstream file(filename);
+    string line;
 
-    while (std::getline(file, line)) {
-        std::istringstream iss(line);
-        std::string title, category, dateStr, priorityStr, recurrenceType, completedStr;
+    while (getline(file, line)) {
+        istringstream iss(line);
+        string title, category, dateStr, priorityStr, recurrenceType, completedStr;
         int priority;
 
-        std::getline(iss, title, '|');
-        std::getline(iss, category, '|');
-        std::getline(iss, dateStr, '|');
-        std::getline(iss, priorityStr, '|');
-        std::getline(iss, recurrenceType, '|');
-        std::getline(iss, completedStr, '|');
+        getline(iss, title, '|');
+        getline(iss, category, '|');
+        getline(iss, dateStr, '|');
+        getline(iss, priorityStr, '|');
+        getline(iss, recurrenceType, '|');
+        getline(iss, completedStr, '|');
 
-        priority = std::stoi(priorityStr);
+        priority = stoi(priorityStr);
         bool completed = (completedStr == "1");
 
-        std::tm date = {};
-        std::istringstream dateStream(dateStr);
-        dateStream >> std::get_time(&date, "%Y-%m-%d");
+        tm date = {};
+        istringstream dateStream(dateStr);
+        dateStream >> get_time(&date, "%Y-%m-%d");
 
         tasks.emplace_back(title, category, date, priority, recurrenceType, completed);
     }
 }
 
-void TaskManager::saveTasks(const std::string& filename) {
-    std::ofstream file(getDataFilePath());
+void TaskManager::saveTasks(const string& filename) {
+    ofstream file(getDataFilePath());
     for (const auto& task : tasks) {
         file << task.toString() << "\n";
     }
@@ -50,25 +51,25 @@ void TaskManager::addTask(const Task& task) {
     projectRoot.cdUp();
     QString filePath = projectRoot.filePath("data/tasks.txt");
 
-    std::ofstream file(filePath.toStdString(), std::ios::app);
+    ofstream file(filePath.toStdString(), ios::app);
 
     if (file.is_open()) {
         file << task.toString() << "\n";
         file.close();
     } else {
-        std::cerr << "❌ Failed to open tasks.txt at: " << filePath.toStdString() << "\n";
+        cerr << "❌ Failed to open tasks.txt at: " << filePath.toStdString() << "\n";
     }
 }
 
 void TaskManager::listAllTasks() const {
     for (const auto& task : tasks) {
-        std::cout << task.toString() << std::endl;
+        cout << task.toString() << endl;
     }
 }
 
-bool isToday(const std::tm& date) {
-    std::time_t now = std::time(nullptr);
-    std::tm* today = std::localtime(&now);
+bool isToday(const tm& date) {
+    time_t now = time(nullptr);
+    tm* today = localtime(&now);
     return (date.tm_year == today->tm_year &&
             date.tm_mon == today->tm_mon &&
             date.tm_mday == today->tm_mday);
@@ -77,22 +78,22 @@ bool isToday(const std::tm& date) {
 void TaskManager::showTodayTasks() {
     sortByPriority();
 
-    std::cout << "📅 Today's Tasks:\n";
-    std::cout << "------------------\n";
+    cout << "📅 Today's Tasks:\n";
+    cout << "------------------\n";
 
     int count = 0;
     for (const auto& task : tasks) {
         if (isToday(task.dueDate) || isRecurringToday(task)) {
-            std::cout << "🔸 " << task.toString() << std::endl;
+            cout << "🔸 " << task.toString() << endl;
             count++;
         }
     }
 
     if (count == 0) {
-        std::cout << "🎉 No tasks for today. Enjoy your free time!\n";
+        cout << "🎉 No tasks for today. Enjoy your free time!\n";
     } else {
-        std::cout << "\n✅ Total tasks for today: " << count << "\n";
-        std::cout << "💡 Tip: Stay focused, one task at a time.\n";
+        cout << "\n✅ Total tasks for today: " << count << "\n";
+        cout << "💡 Tip: Stay focused, one task at a time.\n";
     }
 }
 
@@ -101,15 +102,15 @@ bool compareByPriority(const Task& a, const Task& b) {
 }
 
 void TaskManager::sortByPriority() {
-    std::sort(tasks.begin(), tasks.end(), compareByPriority);
+    sort(tasks.begin(), tasks.end(), compareByPriority);
 }
 
 bool TaskManager::isRecurringToday(const Task& task) const {
     if (task.recurrenceType == "none") return false;
 
-    std::time_t now = std::time(nullptr);
-    std::tm* today = std::localtime(&now);
-    std::tm due = task.dueDate;
+    time_t now = time(nullptr);
+    tm* today = localtime(&now);
+    tm due = task.dueDate;
 
     if (task.recurrenceType == "weekly") {
         return (due.tm_wday == today->tm_wday);
@@ -119,27 +120,27 @@ bool TaskManager::isRecurringToday(const Task& task) const {
     return false;
 }
 
-void TaskManager::searchByTitle(const std::string& keyword) const {
-    std::cout << "Search Results for \"" << keyword << "\":\n";
+void TaskManager::searchByTitle(const string& keyword) const {
+    cout << "Search Results for \"" << keyword << "\":\n";
 
-    std::string loweredKeyword = keyword;
-    std::transform(loweredKeyword.begin(), loweredKeyword.end(), loweredKeyword.begin(), ::tolower);
+    string loweredKeyword = keyword;
+    transform(loweredKeyword.begin(), loweredKeyword.end(), loweredKeyword.begin(), ::tolower);
 
     for (const auto& task : tasks) {
-        std::string loweredTitle = task.title;
-        std::transform(loweredTitle.begin(), loweredTitle.end(), loweredTitle.begin(), ::tolower);
+        string loweredTitle = task.title;
+        transform(loweredTitle.begin(), loweredTitle.end(), loweredTitle.begin(), ::tolower);
 
-        if (loweredTitle.find(loweredKeyword) != std::string::npos) {
-            std::cout << task.toString() << std::endl;
+        if (loweredTitle.find(loweredKeyword) != string::npos) {
+            cout << task.toString() << endl;
         }
     }
 }
 
-std::vector<Task> TaskManager::getAllTasks() const {
+vector<Task> TaskManager::getAllTasks() const {
     return tasks;
 }
 
-bool TaskManager::markTaskCompleted(const std::string& title) {
+bool TaskManager::markTaskCompleted(const string& title) {
     for (Task& task : tasks) {
         if (task.getTitle() == title) {
             task.setCompleted(true);
@@ -149,7 +150,7 @@ bool TaskManager::markTaskCompleted(const std::string& title) {
     return false;
 }
 
-std::string TaskManager::getDataFilePath() const {
+string TaskManager::getDataFilePath() const {
     QString rootPath = QCoreApplication::applicationDirPath();
     QDir projectRoot(rootPath);
     projectRoot.cdUp();
@@ -158,7 +159,7 @@ std::string TaskManager::getDataFilePath() const {
     return filePath.toStdString();
 }
 
-std::string TaskManager::getArchivedFilePath() const {
+string TaskManager::getArchivedFilePath() const {
     QString rootPath = QCoreApplication::applicationDirPath();
     QDir projectRoot(rootPath);
     projectRoot.cdUp();
@@ -167,9 +168,9 @@ std::string TaskManager::getArchivedFilePath() const {
     return filePath.toStdString();
 }
 
-void TaskManager::overwriteTasks(const std::vector<Task>& updatedTasks) {
+void TaskManager::overwriteTasks(const vector<Task>& updatedTasks) {
     tasks = updatedTasks;
-    std::ofstream file(getDataFilePath());
+    ofstream file(getDataFilePath());
     for (const auto& task : tasks) {
         file << task.toString() << "\n";
     }
