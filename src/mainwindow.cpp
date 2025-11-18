@@ -766,7 +766,6 @@ void MainWindow::onArchiveCompletedClicked()
     ui->taskList->addItem("📦 Archived completed tasks.");
 }
 
-
 void MainWindow::onResetFiltersClicked()
 {
     ui->searchBar->clear();
