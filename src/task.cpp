@@ -1,12 +1,13 @@
 #include "Task.h"
 #include <sstream>
 #include <iomanip>
+using namespace std;
 
-Task::Task(const std::string& title,
-           const std::string& category,
-           const std::tm& dueDate,
+Task::Task(const string& title,
+           const string& category,
+           const tm& dueDate,
            int priority,
-           const std::string& recurrenceType,
+           const string& recurrenceType,
            bool isCompleted)
     : title(title),
     category(category),
@@ -15,18 +16,18 @@ Task::Task(const std::string& title,
     recurrenceType(recurrenceType),
     isCompleted(isCompleted) {}
 
-std::string Task::toString() const {
-    std::ostringstream oss;
+string Task::toString() const {
+    ostringstream oss;
     oss << title << "|"
         << category << "|"
-        << std::put_time(&dueDate, "%Y-%m-%d") << "|"
+        << put_time(&dueDate, "%Y-%m-%d") << "|"
         << priority << "|"
         << recurrenceType << "|"
         << (isCompleted ? "1" : "0");
     return oss.str();
 }
 
-std::string Task::getTitle() const {
+string Task::getTitle() const {
     return title;
 }
 
@@ -34,7 +35,7 @@ int Task::getPriority() const {
     return priority;
 }
 
-std::tm Task::getDueDate() const {
+tm Task::getDueDate() const {
     return dueDate;
 }
 
