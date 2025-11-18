@@ -1,28 +1,29 @@
 #pragma once
 #include <string>
 #include <ctime>
+using namespace std;
 
 class Task {
 public:
-    std::string title;
-    std::string category;
-    std::tm dueDate;
+    string title;
+    string category;
+    tm dueDate;
     int priority;
-    std::string recurrenceType;
+    string recurrenceType;
     bool isCompleted;
 
-    Task(const std::string& title,
-               const std::string& category,
-               const std::tm& dueDate,
+    Task(const string& title,
+               const string& category,
+               const tm& dueDate,
                int priority,
-               const std::string& recurrenceType,
+               const string& recurrenceType,
                bool isCompleted = false);
 
-    std::string toString() const;
+    string toString() const;
 
-    std::string getTitle() const;
+    string getTitle() const;
     int getPriority() const;
-    std::tm getDueDate() const;
+    tm getDueDate() const;
     bool getCompleted() const;
     void setCompleted(bool completed);
 };
